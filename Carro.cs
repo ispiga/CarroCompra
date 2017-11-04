@@ -70,10 +70,14 @@ namespace CarroCompra
         /// </summary>
         public void MostrarListaCarro()
         {
+            float precioTotal = 0;
             foreach (Articulo articuloEnLista in listaArticulos)
             {
+                precioTotal += articuloEnLista.Precio;
                 Console.WriteLine(articuloEnLista);
             }
+
+            Console.WriteLine(" Total: " + precioTotal);
         }
 
         /// <summary>
@@ -82,12 +86,16 @@ namespace CarroCompra
         /// </summary>
         public void MostrarListaCarroOrdenadoPorPrecio()
         {
-            listaArticulos.Sort();    
+            listaArticulos.Sort();
+            float precioTotal = 0;
 
             foreach (Articulo articuloEnLista in listaArticulos)
             {
+                precioTotal += articuloEnLista.Precio;
                 Console.WriteLine(articuloEnLista);
             }
+
+            Console.WriteLine(" Total: " + precioTotal);
         }
 
         /// <summary>
@@ -98,11 +106,15 @@ namespace CarroCompra
         public void MostrarListaCarroOrdenadoPorNombrePrecio()
         {
             listaArticulos.Sort(delegate (Articulo articulo1, Articulo articulo2) { return articulo1.NombreArticulo.CompareTo(articulo2.NombreArticulo); });
+            float precioTotal = 0;
 
             foreach (Articulo articuloEnLista in listaArticulos)
             {
+                precioTotal += articuloEnLista.Precio;
                 Console.WriteLine(articuloEnLista);
             }
+
+            Console.WriteLine(" Total: " + precioTotal);
         }
     }
 }
