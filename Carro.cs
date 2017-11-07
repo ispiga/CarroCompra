@@ -105,7 +105,16 @@ namespace CarroCompra
         /// </summary>
         public void MostrarListaCarroOrdenadoPorNombrePrecio()
         {
-            listaArticulos.Sort(delegate (Articulo articulo1, Articulo articulo2) { return articulo1.NombreArticulo.CompareTo(articulo2.NombreArticulo); });
+            //Ordenamos directamente con el metodo delegado.
+            //listaArticulos.Sort(delegate (Articulo articulo1, Articulo articulo2) { return articulo1.NombreArticulo.CompareTo(articulo2.NombreArticulo); });
+            
+            //Ordenamos pasandole a Sort el metodo que contiene la comparacion.
+            //listaArticulos.Sort(ComparaNombreArticulo);
+
+            //Otra forma de ordenar utilizando Comparison y pasandole el metodo que contiene la comparacion.
+            Comparison<Articulo> comparacionNombreArticulo = new Comparison<Articulo>(ComparaNombreArticulo);
+            listaArticulos.Sort(comparacionNombreArticulo);
+
             float precioTotal = 0;
 
             foreach (Articulo articuloEnLista in listaArticulos)
@@ -116,5 +125,19 @@ namespace CarroCompra
 
             Console.WriteLine(" Total: " + precioTotal);
         }
+
+        /// <summary>
+        /// Metodo que compara nombres de articulos y posteriormente utilizar 
+        /// este metodo en Sort con la sobrecarga Sort(Comparison<T>).
+        /// </summary>
+        /// <param name="articulo1"></param>
+        /// <param name="articulo2"></param>
+        /// <returns></returns>
+        private static int ComparaNombreArticulo(Articulo articulo1, Articulo articulo2)
+        {
+            return articulo1.NombreArticulo.CompareTo(articulo2.NombreArticulo);
+        }
+        
     }
+
 }
